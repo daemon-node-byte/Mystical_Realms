@@ -26,4 +26,4 @@ logs
 # custom
 .history
 .vscode
-
+.editorconfig
