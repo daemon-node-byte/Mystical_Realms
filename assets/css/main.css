@@ -7,6 +7,9 @@
         @apply dark:bg-neutral-900 dark:text-white bg-neutral-50 text-black;
         font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
+    a {
+        @apply text-primary dark:text-primary hover:text-primary-600 dark:hover:text-primary-400 transition-colors ease-in-out duration-100;
+    }
 }
 
 @layer utilities {
@@ -20,3 +23,4 @@
         @apply bg-gradient-to-br from-primary-500 to-secondary-600;
     }
 }
+

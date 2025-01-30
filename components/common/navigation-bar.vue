@@ -28,7 +28,7 @@ const tarotLinks = [
           <ShaNavigationMenuContent>
             <div class="max-w-[300px] w-[270px] py-4 px-6">
               <ShaNavigationMenuLink
-                as-child
+                asChild
                 v-for="link in tarotLinks"
                 :key="link.href"
               >
@@ -54,7 +54,7 @@ const tarotLinks = [
     </div>
     <div class="block md:hidden">
       <ShaDropdownMenu>
-        <ShaDropdownMenuTrigger as-child>
+        <ShaDropdownMenuTrigger asChild>
           <Icon name="cil:hamburger-menu" size="36" />
         </ShaDropdownMenuTrigger>
         <ShaDropdownMenuContent align="end">

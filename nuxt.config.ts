@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     "@hypernym/nuxt-anime",
     "@nuxt/test-utils/module",
     "@nuxtjs/color-mode",
+    "@vee-validate/nuxt",
   ],
   icon: {
     serverBundle: {
@@ -29,6 +30,7 @@ export default defineNuxtConfig({
   },
   tailwindcss: {
     exposeConfig: true,
+    cssPath: "~/assets/css/main.css",
     config: {
       theme: {
         extend: {
@@ -111,9 +113,9 @@ export default defineNuxtConfig({
     key: process.env.SUPABASE_KEY,
     url: process.env.SUPABASE_URL,
     redirectOptions: {
-      login: "/login",
+      login: "/auth/login",
       callback: "/callback",
-      exclude: ["/", "/legal/*"],
+      exclude: ["/", "/legal/*", "/auth/login", "/auth/register"],
       cookieRedirect: true
     },
     cookieOptions: {
