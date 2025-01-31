@@ -4,11 +4,23 @@ import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 
 const agreement = ref(false);
-
+const supabase = useSupabaseClient();
 watch(agreement, (newVal) => {
   form.setFieldValue("agree", newVal);
-  console.log("agreement", form.values);
 });
+
+const signup = async (email: string, password: string) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+  if (error) {
+    throw createError(error.message);
+  }
+  if (data) {
+    console.log("signup success", data);
+  }
+};
 
 const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 const formSchema = toTypedSchema(
@@ -72,7 +84,12 @@ const form = useForm({
 });
 
 const onSubmit = form.handleSubmit(async (values) => {
-  console.log("form submitted", values, form);
+  try {
+    await signup(values.email, values.auth.password);
+    form.resetForm();
+  } catch (error) {
+    form.setFieldError("email", "error with submitting");
+  }
 });
 
 const formInputAttrs = [

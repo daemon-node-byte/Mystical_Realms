@@ -47,6 +47,7 @@ const tarotLinks = [
       <ShaButton
         class="ml-4 hover:gradient-bg transition-all ease-in-out duration-100"
         variant="outline"
+        @click="() => $router.push('/auth/login')"
       >
         <Icon name="mdi:login" size="24" />
       </ShaButton>
@@ -60,8 +61,14 @@ const tarotLinks = [
         <ShaDropdownMenuContent align="end">
           <CommonColorModeToggle />
           <ShaDropdownMenuSeparator />
-          <ShaDropdownMenuItem>Login</ShaDropdownMenuItem>
-          <ShaDropdownMenuItem>Register</ShaDropdownMenuItem>
+          <ShaDropdownMenuItem>
+            <NuxtLink to="/auth/login">Login</NuxtLink>
+          </ShaDropdownMenuItem>
+          <ShaDropdownMenuItem>
+            <NuxtLink to="/auth/register"
+              >Register</NuxtLink
+            ></ShaDropdownMenuItem
+          >
           <ShaDropdownMenuSeparator />
 
           <ShaDropdownMenuLabel>Tarot</ShaDropdownMenuLabel>

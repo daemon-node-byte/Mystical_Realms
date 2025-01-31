@@ -3,6 +3,8 @@ import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 
+const supabase = useSupabaseClient();
+
 const formSchema = toTypedSchema(
   z.object({
     email: z.string().email().trim(),
@@ -19,7 +21,18 @@ const form = useForm({
 });
 
 const onSubmit = form.handleSubmit(async (values) => {
-  console.log("form submitted", values, form);
+  try {
+    const { data } = await supabase.auth.signInWithPassword({
+      email: values.email,
+      password: values.password,
+    });
+    if (data) {
+      navigateTo("/confirm");
+    }
+  } catch (error) {
+    console.error(error);
+    throw createError("error with login");
+  }
 });
 
 const formInputAttrs = [

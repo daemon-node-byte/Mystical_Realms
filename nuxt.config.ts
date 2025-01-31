@@ -1,4 +1,3 @@
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
@@ -114,14 +113,19 @@ export default defineNuxtConfig({
     url: process.env.SUPABASE_URL,
     redirectOptions: {
       login: "/auth/login",
-      callback: "/callback",
-      exclude: ["/", "/legal/*", "/auth/login", "/auth/register", "/api/public/*"],
+      callback: "/confirm",
+      exclude: ["/", "/legal/*", "/auth/login", "/auth/register", "/api/public/*", '/error'],
       cookieRedirect: true
     },
     cookieOptions: {
       maxAge: 60 * 60 * 8,
       sameSite: "lax",
       secure: true
+    },
+    clientOptions: {
+      auth: {
+        flowType: "pkce",
+      },
     }
   }
 });
