@@ -37,37 +37,31 @@ export type Database = {
       cards: {
         Row: {
           arcana: string | null
-          fools_journey: string | null
-          id: number
-          rank_int: number | null
+          rank_int: string | null
           reversed_description: string | null
           reversed_keywords: string | null
-          slug_id: string | null
-          title: string
+          slug_id: string
+          title: string | null
           upright_description: string | null
           upright_keywords: string | null
         }
         Insert: {
           arcana?: string | null
-          fools_journey?: string | null
-          id?: number
-          rank_int?: number | null
+          rank_int?: string | null
           reversed_description?: string | null
           reversed_keywords?: string | null
-          slug_id?: string | null
-          title?: string
+          slug_id: string
+          title?: string | null
           upright_description?: string | null
           upright_keywords?: string | null
         }
         Update: {
           arcana?: string | null
-          fools_journey?: string | null
-          id?: number
-          rank_int?: number | null
+          rank_int?: string | null
           reversed_description?: string | null
           reversed_keywords?: string | null
-          slug_id?: string | null
-          title?: string
+          slug_id?: string
+          title?: string | null
           upright_description?: string | null
           upright_keywords?: string | null
         }
@@ -75,113 +69,21 @@ export type Database = {
       }
       profiles: {
         Row: {
-          created_at: string
-          id: number
-          screen_name: string
-          user_id: string | null
+          id: string
+          user_id: string
+          username: string
         }
         Insert: {
-          created_at?: string
-          id?: number
-          screen_name: string
-          user_id?: string | null
+          id?: string
+          user_id?: string
+          username: string
         }
         Update: {
-          created_at?: string
-          id?: number
-          screen_name?: string
-          user_id?: string | null
+          id?: string
+          user_id?: string
+          username?: string
         }
         Relationships: []
-      }
-      spread_placement_cards: {
-        Row: {
-          author: string | null
-          created_at: string
-          id: number
-          label: string
-          raw_transform_css: string
-          rotation_deg: number | null
-          sequence: number
-          spread_id: number | null
-          x_axis: number | null
-          y_axis: number | null
-        }
-        Insert: {
-          author?: string | null
-          created_at?: string
-          id?: number
-          label: string
-          raw_transform_css?: string
-          rotation_deg?: number | null
-          sequence: number
-          spread_id?: number | null
-          x_axis?: number | null
-          y_axis?: number | null
-        }
-        Update: {
-          author?: string | null
-          created_at?: string
-          id?: number
-          label?: string
-          raw_transform_css?: string
-          rotation_deg?: number | null
-          sequence?: number
-          spread_id?: number | null
-          x_axis?: number | null
-          y_axis?: number | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "spread_placement_cards_author_fkey"
-            columns: ["author"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["screen_name"]
-          },
-          {
-            foreignKeyName: "spread_placement_cards_spread_id_fkey"
-            columns: ["spread_id"]
-            isOneToOne: false
-            referencedRelation: "spreads"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      spreads: {
-        Row: {
-          created_at: string
-          id: number
-          private: boolean
-          profile_id: number | null
-          title: string | null
-          updated_at: string | null
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-          private?: boolean
-          profile_id?: number | null
-          title?: string | null
-          updated_at?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: number
-          private?: boolean
-          profile_id?: number | null
-          title?: string | null
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "spreads_profile_id_fkey"
-            columns: ["profile_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
       }
     }
     Views: {

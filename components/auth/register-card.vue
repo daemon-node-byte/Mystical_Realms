@@ -4,14 +4,47 @@ import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 
 const agreement = ref(false);
+
+watch(agreement, (newVal) => {
+  form.setFieldValue("agree", newVal);
+  console.log("agreement", form.values);
+});
+
 const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 const formSchema = toTypedSchema(
   z.object({
-    username: z.string().min(3).max(25),
-    email: z.string().email(),
+    // TODO - Fix username validation during sign up
+    // username: z
+    //   .string()
+    //   .min(5, "Username must be at least 5 characters.")
+    //   .max(25, "Username must be less than 25 characters.")
+    //   .regex(
+    //     /^[a-zA-Z0-9_]*$/,
+    //     "Username can only contain letters, numbers, and underscores."
+    //   )
+    //   .refine((data) => !["admin", "super_admin", "moderator"].includes(data), {
+    //     message: "Username cannot be 'admin'.",
+    //   })
+    //   .refine((username) => {
+    //     let timeout: NodeJS.Timeout;
+    //     timeout = setTimeout(async () => {
+    //       console.log("checking username...");
+    //       clearTimeout(timeout);
+    //       const { data: profiles } = await supabase
+    //         .from("profiles")
+    //         .select("username")
+    //         .eq("username", username);
+    //       console.log("profiles", profiles);
+    //       return profiles && profiles.length !== 0;
+    //     }, 2000);
+    //   }),
+    email: z.string().email().trim(),
     auth: z
       .object({
-        password: z.string().min(8),
+        password: z.string().regex(passRegex, {
+          message:
+            "Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number.",
+        }),
         confirmPassword: z.string(),
       })
       .refine((data) => data.password === data.confirmPassword, {
@@ -27,7 +60,8 @@ const formSchema = toTypedSchema(
 const form = useForm({
   validationSchema: formSchema,
   initialValues: {
-    username: "",
+    //ANCHOR - Uncomment the username field to enable username validation
+    // username: "",
     email: "",
     auth: {
       password: "",
@@ -42,13 +76,14 @@ const onSubmit = form.handleSubmit(async (values) => {
 });
 
 const formInputAttrs = [
-  {
-    name: "username",
-    label: "Username",
-    type: "text",
-    description: "This is your public display name.",
-    message: "",
-  },
+  //ANCHOR - Uncomment the username field to enable username validation
+  // {
+  //   name: "username",
+  //   label: "Username",
+  //   type: "text",
+  //   description: "This is your public display name.",
+  //   message: "",
+  // },
   {
     name: "email",
     label: "Email",
@@ -78,7 +113,7 @@ const formInputAttrs = [
     <ShaCardHeader>
       <ShaCardTitle>Register</ShaCardTitle>
       <ShaCardDescription
-        >Sign up for free to unlock features
+        >Sign up for a free account to unlock more features
       </ShaCardDescription>
     </ShaCardHeader>
 
@@ -117,7 +152,12 @@ const formInputAttrs = [
           </ShaFormItem>
         </ShaFormField>
         <div class="flex items-center justify-center space-x-2">
-          <ShaCheckbox id="terms" v-model="agreement" />
+          <ShaCheckbox
+            id="terms"
+            v-model="agreement"
+            :checked="agreement"
+            @update:checked="(e) => (agreement = e)"
+          />
           <ShaLabel for="terms">
             I agree to the
             <NuxtLink class="link" to="/terms">Terms of Service</NuxtLink> and
@@ -125,10 +165,10 @@ const formInputAttrs = [
           </ShaLabel>
         </div>
         <ShaButton
-          class="w-full"
+          class="w-full !bg-primary hover:text-white"
           @click="onSubmit"
           :loading="form.isSubmitting"
-          :disabled="agreement"
+          :disabled="form.values.agree === false"
         >
           Register
         </ShaButton>

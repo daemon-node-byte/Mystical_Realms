@@ -115,7 +115,7 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: "/auth/login",
       callback: "/callback",
-      exclude: ["/", "/legal/*", "/auth/login", "/auth/register"],
+      exclude: ["/", "/legal/*", "/auth/login", "/auth/register", "/api/public/*"],
       cookieRedirect: true
     },
     cookieOptions: {
