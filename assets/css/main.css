@@ -25,6 +25,12 @@
     .gradient-bg {
         @apply bg-gradient-to-br from-primary-500 to-secondary-600;
     }
+    .cta-text {
+        @apply text-2xl md:text-4xl font-bold flex flex-col space-y-2 justify-end md:justify-center items-center md:items-start h-[50vh] md:h-[75vh] tracking-wide;
+    }
+    .cta-btn, .cta-btn-mobile {
+        @apply md:mr-24 text-lg md:text-2xl py-6 px-6 rounded-full bg-gradient-to-tr from-primary to-secondary !text-white hover:!scale-110 hover:!duration-300 hover:!ease-in-out hover:!transition-transform active:!scale-95 shadow-lg;
+    }
 }
 
 @layer components {

@@ -27,6 +27,10 @@ export default defineNuxtConfig({
     storage: 'localStorage',
     storageKey: 'color-mode',
   },
+  anime: {
+    provide: true,
+    composables: true,
+  },
   tailwindcss: {
     exposeConfig: true,
     cssPath: "~/assets/css/main.css",

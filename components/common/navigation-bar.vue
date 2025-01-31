@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const tarotLinks = [
   {
-    title: "Tarot Cards",
+    title: "Cards catalog",
     href: "/tarot/cards",
     description:
       "Explore the catalog of the 78 cards in tarot deck. Study the art, meanings, and symbolism of each card.",
@@ -28,9 +28,10 @@ const tarotLinks = [
           <ShaNavigationMenuContent>
             <div class="max-w-[300px] w-[270px] py-4 px-6">
               <ShaNavigationMenuLink
-                asChild
                 v-for="link in tarotLinks"
                 :key="link.href"
+                @click="() => $router.push(link.href)"
+                class="hover:!bg-neutral-700 !cursor-pointer"
               >
                 <NuxtLink class="text-lg" :to="link.href">
                   {{ link.title }}
