@@ -1,25 +1,24 @@
 <script setup lang="ts">
-const tarotLinks = [
-  {
-    title: "Cards catalog",
-    href: "/tarot/cards",
-    description:
-      "Explore the catalog of the 78 cards in tarot deck. Study the art, meanings, and symbolism of each card.",
-    active: true,
-  },
-].filter((link) => link.active);
+import type { LinkType } from "~/types/sitePageLinkData.types";
+
+const tarotLinks = useSitePageLinkData().navigation.tarot.filter(
+  (link: LinkType) => link.active
+);
 </script>
 
 <template>
   <nav
-    class="flex justify-between items-center py-4 px-8 bg-neutral-50 dark:bg-neutral-950"
+    class="sticky top-0 flex justify-between items-center py-2 md:py-4 px-4 md:px-8 bg-neutral-50 dark:bg-neutral-950"
   >
     <div class="flex items-center space-x-2">
-      <nuxt-icon
-        name="logo"
-        class="text-3xl text-indigo-700 dark:text-indigo-300"
+      <Icon
+        name="mr-icons:logo"
+        mode="css"
+        class="text-xl md:text-3xl fill-indigo-700 dark:fill-indigo-300"
       />
-      <NuxtLink class="theme-font text-3xl" to="/"> Mystical Realms </NuxtLink>
+      <NuxtLink class="theme-font text-xl md:text-3xl" to="/">
+        Mystical Realms
+      </NuxtLink>
     </div>
     <ShaNavigationMenu class="hidden md:flex">
       <ShaNavigationMenuList>
@@ -57,7 +56,7 @@ const tarotLinks = [
     <div class="block md:hidden">
       <ShaDropdownMenu>
         <ShaDropdownMenuTrigger asChild>
-          <Icon name="cil:hamburger-menu" size="36" />
+          <Icon name="cil:hamburger-menu" size="28" />
         </ShaDropdownMenuTrigger>
         <ShaDropdownMenuContent align="end">
           <CommonColorModeToggle />

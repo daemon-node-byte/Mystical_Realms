@@ -1,5 +1,5 @@
 <template>
-  <div id="root-app" :class="`min-h-screen max-w-full relative ${$colorMode.value}-mode`">
+  <div id="root-app" :class="`${$colorMode.value}-mode`">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

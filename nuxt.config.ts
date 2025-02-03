@@ -4,7 +4,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     "@nuxt/icon",
-    'nuxt-icons',
     "@nuxt/fonts",
     "@nuxtjs/supabase",
     "shadcn-nuxt",
@@ -13,8 +12,15 @@ export default defineNuxtConfig({
     "@nuxt/test-utils/module",
     "@nuxtjs/color-mode",
     "@vee-validate/nuxt",
+    "@nuxt/image"
   ],
   icon: {
+    provider: "server",
+    customCollections: [{
+      dir: "./assets/mr-icons",
+      prefix: "mr-icons",
+      normalizeIconName: false,
+    }],
     serverBundle: {
       collections: ['radix-icons', 'cil', 'mdi']
     }

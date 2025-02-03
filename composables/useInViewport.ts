@@ -1,8 +1,6 @@
-import { ref, onMounted, onUnmounted } from 'vue';
-
-export default function useInViewport(el: HTMLElement | null) {
+export default function useInViewport(el: string) {
   const inView = ref(false);
-  const element = ref(el)
+  const element = useTemplateRef<HTMLElement>(el)
   const observer = new IntersectionObserver(
     ([entry]) => {
       inView.value = entry.isIntersecting;
