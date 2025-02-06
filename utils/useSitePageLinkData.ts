@@ -10,6 +10,22 @@ export default function useSitePageLinkData() {
           active: true,
           icon: "mr-icons:cards"
         },
+        {
+          title: "Spread editor",
+          href: "/tarot/spread/editor",
+          description:
+            "Create and customize your own tarot spreads. Save and share them with others. Use them in your online readings.",
+          active: true,
+          icon: "mr-icons:placemat"
+        },
+        {
+          title: "Online readings",
+          href: "/tarot/spread/editor",
+          description:
+            "Create and customize your own tarot spreads. Save and share them with others. Use them in your online readings.",
+          active: true,
+          icon: "mr-icons:readings"
+        }
       ],
     },
     serviceCards: [],
