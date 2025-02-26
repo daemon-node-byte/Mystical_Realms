@@ -22,7 +22,7 @@ export default function useSitePageLinkData() {
           title: "Online readings",
           href: "/tarot/spread/editor",
           description:
-            "Create and customize your own tarot spreads. Save and share them with others. Use them in your online readings.",
+            "Get your reading online. Choose from one of our pre-made spreads or create your own. Shuffle the deck and draw the cards. Get you reading in seconds.",
           active: true,
           icon: "mr-icons:readings"
         }

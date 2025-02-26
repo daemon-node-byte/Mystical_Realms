@@ -3,5 +3,6 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+    <ShaToaster />
   </div>
 </template>

@@ -2,7 +2,9 @@
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
+import { useToast } from "../ui/toast";
 
+const { toast } = useToast();
 const supabase = useSupabaseClient();
 
 const formSchema = toTypedSchema(
@@ -31,7 +33,7 @@ const onSubmit = form.handleSubmit(async (values) => {
     }
   } catch (error) {
     console.error(error);
-    throw createError("error with login");
+    toast({ title: "Uh oh! Something went wrong.", description: "invalid email or password" });
   }
 });
 
@@ -62,29 +64,20 @@ const formInputAttrs = [
 
     <ShaCardContent>
       <form class="space-y-4">
-        <ShaFormField
-          v-for="input in formInputAttrs"
-          :key="input.name"
-          :name="input.name"
-          v-slot="{ componentField }"
-        >
+        <ShaFormField v-for="input in formInputAttrs" :key="input.name" :name="input.name" v-slot="{ componentField }">
           <ShaFormItem class="relative pb-4">
             <ShaFormLabel class="align-bottom pr-2">{{
               input.label
-            }}</ShaFormLabel>
+              }}</ShaFormLabel>
             <ShaTooltipProvider>
               <ShaTooltip>
                 <ShaTooltipTrigger @click="(e) => e.preventDefault()">
-                  <Icon
-                    name="mdi:help-box-outline"
-                    size="16"
-                    class="align-bottom cursor-pointer"
-                  />
+                  <Icon name="mdi:help-box-outline" size="16" class="align-bottom cursor-pointer" />
                 </ShaTooltipTrigger>
                 <ShaTooltipContent>
                   <ShaFormDescription class="text-xs text-muted">{{
                     input.description
-                  }}</ShaFormDescription>
+                    }}</ShaFormDescription>
                 </ShaTooltipContent>
               </ShaTooltip>
             </ShaTooltipProvider>
@@ -94,11 +87,7 @@ const formInputAttrs = [
             <ShaFormMessage class="text-danger absolute" />
           </ShaFormItem>
         </ShaFormField>
-        <ShaButton
-          class="w-full !bg-primary hover:text-white"
-          @click="onSubmit"
-          :loading="form.isSubmitting"
-        >
+        <ShaButton class="w-full !bg-primary hover:text-white" @click="onSubmit" :loading="form.isSubmitting">
           Login
         </ShaButton>
       </form>
